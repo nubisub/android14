@@ -1,6 +1,7 @@
 package com.example.sqlitepractice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class MahasiswaRVAdapter extends
                         .mahasiswa_rv_item, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder
                                          holder, int position) {
@@ -43,6 +45,22 @@ public class MahasiswaRVAdapter extends
         holder.namaTV.setText(modal.getNama());
         holder.kelasTV.setText(modal.getKelas());
         holder.nohpTV.setText(modal.getNohp());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                                       @Override
+                                                       public void onClick(View v) {
+
+                                                           Intent i = new Intent(context,
+                                                                   UpdateMahasiswa.class);
+
+                                                           i.putExtra("nim", modal.getNim());
+                                                           i.putExtra("nama", modal.getNama());
+                                                           i.putExtra("kelas", modal.getKelas());
+                                                           i.putExtra("nohp", modal.getNohp());
+
+                                                           context.startActivity(i);
+                                                       }
+                                                   });
     }
 
     @Override
