@@ -15,52 +15,44 @@ import java.util.ArrayList;
 public class MahasiswaRVAdapter extends
         RecyclerView.Adapter<MahasiswaRVAdapter.ViewHolder> {
 
-    private ArrayList<MahasiswaModal>
-            mahasiswaModalArrayList;
+    private ArrayList<MahasiswaModal>mahasiswaModalArrayList;
     private Context context;
 
-    public MahasiswaRVAdapter(ArrayList<MahasiswaModal>
-                                      mahasiswaModalArrayList, Context context) {
-        this.mahasiswaModalArrayList =
-                mahasiswaModalArrayList;
+    public MahasiswaRVAdapter(ArrayList<MahasiswaModal>mahasiswaModalArrayList, Context context) {
+        this.mahasiswaModalArrayList = mahasiswaModalArrayList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull
-                                                 ViewGroup parent, int viewType) {
-        View view =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
                         .mahasiswa_rv_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder
-                                         holder, int position) {
-        MahasiswaModal modal =
-                mahasiswaModalArrayList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        MahasiswaModal modal = mahasiswaModalArrayList.get(position);
         holder.nimTV.setText(modal.getNim());
         holder.namaTV.setText(modal.getNama());
         holder.kelasTV.setText(modal.getKelas());
         holder.nohpTV.setText(modal.getNohp());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-                                                       @Override
-                                                       public void onClick(View v) {
+           @Override
+           public void onClick(View v) {
 
-                                                           Intent i = new Intent(context,
-                                                                   UpdateMahasiswa.class);
+               Intent i = new Intent(context, UpdateMahasiswa.class);
 
-                                                           i.putExtra("nim", modal.getNim());
-                                                           i.putExtra("nama", modal.getNama());
-                                                           i.putExtra("kelas", modal.getKelas());
-                                                           i.putExtra("nohp", modal.getNohp());
+               i.putExtra("nim", modal.getNim());
+               i.putExtra("nama", modal.getNama());
+               i.putExtra("kelas", modal.getKelas());
+               i.putExtra("nohp", modal.getNohp());
 
-                                                           context.startActivity(i);
-                                                       }
-                                                   });
+               context.startActivity(i);
+           }
+       });
     }
 
     @Override
@@ -75,14 +67,10 @@ public class MahasiswaRVAdapter extends
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nimTV =
-                    itemView.findViewById(R.id.nimTextView);
-            namaTV =
-                    itemView.findViewById(R.id.namaTextView);
-            kelasTV =
-                    itemView.findViewById(R.id.kelasTextView);
-            nohpTV =
-                    itemView.findViewById(R.id.nohpTextView);
+            nimTV = itemView.findViewById(R.id.nimTextView);
+            namaTV = itemView.findViewById(R.id.namaTextView);
+            kelasTV = itemView.findViewById(R.id.kelasTextView);
+            nohpTV = itemView.findViewById(R.id.nohpTextView);
         }
     }
 }

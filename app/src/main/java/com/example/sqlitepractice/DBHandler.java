@@ -12,8 +12,7 @@ import java.util.ArrayList;
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "mahasiswadb";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME =
-            "mahasiswatbl";
+    private static final String TABLE_NAME = "mahasiswatbl";
     private static final String ID_COL = "id";
     private static final String NIM_COL = "nim";
     private static final String NAMA_COL = "nama";
@@ -47,8 +46,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addNewMahasiswa(String nim, String nama,
-                                String kelas, String nohp) {
+    public void addNewMahasiswa(String nim, String nama, String kelas, String nohp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NIM_COL, nim);
@@ -64,8 +62,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " +
                 TABLE_NAME, null);
 
-        ArrayList<MahasiswaModal> mahasiswaModalArrayList
-                = new ArrayList<>();
+        ArrayList<MahasiswaModal> mahasiswaModalArrayList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             do {
@@ -91,8 +88,12 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KELAS_COL, kelas);
         values.put(NOHP_COL, nohp);
 
-        db.update(TABLE_NAME, values, "nim=?", new
-                String[]{originalnim});
+        db.update(TABLE_NAME, values, "nim=?", new String[]{originalnim});
+        db.close();
+    }
+    public void deleteMahasiswa(String nim) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, "nim=?", new String[]{nim});
         db.close();
     }
 }

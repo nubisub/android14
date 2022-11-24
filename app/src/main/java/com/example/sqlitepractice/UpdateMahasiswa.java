@@ -8,9 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class UpdateMahasiswa extends AppCompatActivity {
+public class UpdateMahasiswa extends
+        AppCompatActivity {
+
     private EditText nimEdt, namaEdt, kelasEdt, nohpEdt;
-    private Button updateMahasiswaBtn;
+    private Button updateMahasiswaBtn,
+            deleteMahasiswaBtn;
     private DBHandler dbHandler;
     String nim, nama, kelas, nohp;
 
@@ -23,11 +26,10 @@ public class UpdateMahasiswa extends AppCompatActivity {
         namaEdt = findViewById(R.id.namaEdtEditText);
         kelasEdt = findViewById(R.id.kelasEdtEditText);
         nohpEdt = findViewById(R.id.nohpEdtEditText);
-        updateMahasiswaBtn =
-                findViewById(R.id.updateButton);
+        updateMahasiswaBtn = findViewById(R.id.updateButton);
+        deleteMahasiswaBtn = findViewById(R.id.deleteButton);
 
-        dbHandler = new
-                DBHandler(UpdateMahasiswa.this);
+        dbHandler = new DBHandler(UpdateMahasiswa.this);
 
         nim = getIntent().getStringExtra("nim");
         nama = getIntent().getStringExtra("nama");
@@ -38,22 +40,31 @@ public class UpdateMahasiswa extends AppCompatActivity {
         namaEdt.setText(nama);
         kelasEdt.setText(kelas);
         nohpEdt.setText(nohp);
-
         updateMahasiswaBtn.setOnClickListener(new View.OnClickListener() {
-                                                          @Override
-                                                          public void onClick(View v) {
-                                                              dbHandler.updateMahasiswa(nim,
-                                                                      nimEdt.getText().toString(),
-                                                                      namaEdt.getText().toString(),
-                                                                      kelasEdt.getText().toString(),
-                                                                      nohpEdt.getText().toString());
+              @Override
+              public void onClick(View v) {
 
-                                                              Toast.makeText(UpdateMahasiswa.this, "Mahasiswa telah di-Update..", Toast.LENGTH_SHORT).show();
+                  dbHandler.updateMahasiswa(nim,
+                          nimEdt.getText().toString(),
+                          namaEdt.getText().toString(),
+                          kelasEdt.getText().toString(),
+                          nohpEdt.getText().toString());
 
-                                                              Intent i = new
-                                                                      Intent(UpdateMahasiswa.this, MainActivity.class);
-                                                              startActivity(i);
-                                                          }
-                                                      });
+                  Toast.makeText(UpdateMahasiswa.this, "Mahasiswa telah di-Update..", Toast.LENGTH_SHORT).show();
+
+                  Intent i = new Intent(UpdateMahasiswa.this, MainActivity.class);
+                  startActivity(i);
+              }
+          });
+
+        deleteMahasiswaBtn.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  dbHandler.deleteMahasiswa(nim);
+                  Toast.makeText(UpdateMahasiswa.this, "Mahasiswa telah di-Delete..", Toast.LENGTH_SHORT).show();
+                  Intent i = new Intent(UpdateMahasiswa.this, MainActivity.class);
+                  startActivity(i);
+              }
+          });
     }
 }

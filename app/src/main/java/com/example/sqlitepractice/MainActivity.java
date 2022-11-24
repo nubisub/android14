@@ -31,12 +31,9 @@ public class MainActivity extends AppCompatActivity {
               @Override
               public void onClick(View v) {
                   String nimmhs = nim.getText().toString();
-                  String namamhs =
-                          nama.getText().toString();
-                  String kelasmhs =
-                          kelas.getText().toString();
-                  String nohpmhs =
-                          nohp.getText().toString();
+                  String namamhs = nama.getText().toString();
+                  String kelasmhs = kelas.getText().toString();
+                  String nohpmhs = nohp.getText().toString();
 
                   if (nimmhs.isEmpty() && namamhs.isEmpty()
                           && kelasmhs.isEmpty() && nohpmhs.isEmpty()) {
@@ -44,10 +41,9 @@ public class MainActivity extends AppCompatActivity {
                               "Lengkapilah semua data..", Toast.LENGTH_SHORT).show();
                       return;
                   }
-                  dbHandler.addNewMahasiswa(nimmhs,
-                          namamhs, kelasmhs, nohpmhs);
+                  dbHandler.addNewMahasiswa(nimmhs, namamhs, kelasmhs, nohpmhs);
                   Toast.makeText(MainActivity.this, "Lengkapilah semua data.. Mahasiswa Telah Ditambahkan", Toast.LENGTH_SHORT).show();
-                          nim.setText("");
+                    nim.setText("");
                   nama.setText("");
                   kelas.setText("");
                   nohp.setText("");
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         lihatMhs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-// opening a new activity via a intent.
+                // opening a new activity via a intent.
                 Intent i = new Intent(MainActivity.this,
                         ViewMahasiswa.class);
                 startActivity(i);
